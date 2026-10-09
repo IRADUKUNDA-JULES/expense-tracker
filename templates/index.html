@@ -10,6 +10,8 @@
 <div class="container my-4">
 <h1 class="mb-4">Expense Tracker</h1>
 
+<p>Logged in as {{ current_user.username }} · <a href="/logout">Log out</a></p>
+
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% for type, message in messages %}
     <div class="alert alert-{{ 'success' if type == 'success' else 'danger' }}">

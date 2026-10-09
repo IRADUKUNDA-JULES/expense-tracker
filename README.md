@@ -22,6 +22,6 @@ Python, Flask, Flask-SQLAlchemy, Bootstrap, Chart.js
 
 
 
-**Live demo:** https://expense-tracker-abcd.onrender.com
+**Live demo:** https://expense-tracker-2amd.onrender.com
 
 

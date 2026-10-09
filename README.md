@@ -24,4 +24,12 @@ Python, Flask, Flask-SQLAlchemy, Bootstrap, Chart.js
 
 **Live demo:** https://expense-tracker-2amd.onrender.com
 
+Locally the app uses a SQLite file. To use Postgres instead, set the `DATABASE_URL` environment variable before running.
+
+## Environment variables
+| Name | Purpose |
+|------|---------|
+|`SECRET_KEY` | Signs flash message cookies |
+|`DATABASE_URL` | Postgres connection string (optional locally) |
+
 

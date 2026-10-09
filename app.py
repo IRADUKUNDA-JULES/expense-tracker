@@ -1,11 +1,14 @@
 from flask import Flask, render_template, request, redirect,flash
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import func
 from datetime import date
+import os
 
 app = Flask(__name__)
 app.secret_key = "change -this-to-any-random-text"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///expenses.db"
+uri = os.environ.get("DATABASE_URL", "sqlite:///expenses.db")
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+app.config["SQLALCHEMY_DATABASE_URI"] = uri
 db = SQLAlchemy(app)
 
 class Expenses(db.Model):
@@ -43,7 +46,10 @@ def home():
     if category:
         query = query.filter(Expenses.category == category)
     if month:
-        query = query.filter(func.strftime("%Y-%m", Expenses.date) == month)
+        year, mon = map(int, month.split("-"))
+        start = date(year, mon, 1)
+        end = date(year + (mon == 12), mon % 12 + 1, 1)
+        query = query.filter(Expenses.date >= start, Expenses.date < end)
 
     expenses = query.order_by(Expenses.date.desc()).all()
     total = sum(e.amount for e in expenses)

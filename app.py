@@ -11,6 +11,8 @@ app.secret_key = "change -this-to-any-random-text"
 uri = os.environ.get("DATABASE_URL", "sqlite:///expenses.db")
 if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://", 1)
+if uri.startswith("postgresql://"):
+    uri = uri.replace("postgresql://", "postgresql+psycopg2://", 1)
 app.config["SQLALCHEMY_DATABASE_URI"] = uri
 db = SQLAlchemy(app)
 

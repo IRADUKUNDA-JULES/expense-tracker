@@ -53,6 +53,11 @@
 
 <h3 class="mb-3">Total: ${{ "%.2f"|format(total) }}</h3>
 
+<a class="btn btn-outline-success mb-3"
+   href="/export?category={{ selected_category or '' }}&month={{ selected_month or '' }}">
+  Download CSV
+</a>
+
 <div class="row">
   <div class="col-md-5 mb-4">
     <canvas id="categoryChart"></canvas>
